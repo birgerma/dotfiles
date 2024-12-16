@@ -1,0 +1,193 @@
+#format = """
+#[╭─user───❯](bold blue) $username
+#[┣─system─❯](bold yellow) $hostname
+#[┣─project❯](bold red) $directory$rust$git_branch$git_state$git_status$package$golang$terraform$docker_context$python$docker_context$nodejs
+#[╰─cmd────❯](bold green)
+#"""
+format = """
+${custom.foo}\
+[░▒▓](#a3aed2)\
+[\uf303 ](bg:#a3aed2 fg:#090c0c)\
+[ ](bg:#769ff0 fg:#a3aed2)\
+$python \
+$directory\
+$docker_context\
+[ \ue110 ](fg:#769ff0 bg:#394260)\
+$git_branch\
+$git_status\
+[\u1f907 ](fg:#394260 bg:#212736)\
+\n$character"""
+
+# $username
+# []
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+#  
+# configure directory
+[directory]
+# style = "fg:#e3e5e5 bg:#769ff0"
+style = "fg:#000000 bg:#769ff0"
+format = "[ $path ]($style)"
+# style = "bold italic blue"
+read_only = " "
+truncation_length = 3
+truncation_symbol = "…/"
+truncate_to_repo = true # truncates directory to root folder if in github repo
+
+[hostname]
+ssh_only = true
+format = 'on [$hostname](bold purple) '
+trim_at = "."
+disabled = false
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[✗](bold red)"
+
+
+[cmd_duration]
+min_time = 4
+show_milliseconds = false
+disabled = false
+style = "bold italic red"
+
+[aws]
+symbol = "  "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+#[directory]
+#read_only = " "
+
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+style = "blue bold"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+disabled = false
+
+[container]
+  # enabled = true
+  symbol = "(symbol)"
+  format = 'in container [$symbol \[$name\]](test) {id:echo $CONTAINER_ID}{name:$name}'
+  # format = "[{distro}/{container}]"
+
+[custom.foo]
+symbol = " "
+command = 'echo $CONTAINER_ID' # shows output of command
+detect_files = ['foo'] # can specify filters but wildcards are not supported
+when = ''' test "$CONTAINER_ID" '''
+# format = 'transcending'
+style = 'bold red'
+format = '\([$symbol$output]($style)\)'
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+
+# [git_status]
+# format = '([\[$all_status$ahead_behind\]]($style) )'
+[git_status]
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+stashed = "[${count}*](fg:green bg:#394260)" 
+modified = "[${count}](fg:yellow bg:#394260)+" 
+deleted =  "[${count}-](fg:red bg:#394260)" 
+conflicted =  "[${count}~](red)" 
+ahead = "⇡${count}"
+behind = "⇣${count}"
+untracked = "[${count}?](fg:blue bg:#394260)" 
+staged = "[${count}+](green)" 
+
+[git_state]
+style =	"bold red"
+format = "[$state( $progress_current/$progress_total) ]($style)"
+rebase = "rebase"
+merge = "merge"	
+revert = "revert"	
+cherry_pick = "cherry"
+bisect = "bisect"	
+am = "am"	
+am_or_rebase = "am/rebase"
+
+[golang]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[haskell]
+symbol = "λ "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[package]
+symbol = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = "🐍 "
+pyenv_version_name = true
+format = '[${symbol}python (${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+pyenv_prefix = "venv "
+python_binary = ["./venv/bin/python", "python", "python3", "python2"]
+detect_extensions = ["py"]
+version_format = "v${raw}"
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[shlvl]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
+
+[nodejs]
+format = "via [ Node.js $version](bold green) "
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
