@@ -36,3 +36,8 @@ zoxide init fish --cmd cd| source
 
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 starship init fish | source
+
+if test -e ./vm/$CONTAINER_ID/config.fish 
+	source ./vm/$CONTAINER_ID/config.fish
+end
+
