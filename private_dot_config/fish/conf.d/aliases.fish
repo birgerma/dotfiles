@@ -61,5 +61,5 @@ alias texmake='find . -type f -name "*.tex" -or -name "*.bib"|entr -r make'
 
 # Chezmoi aliase
 alias ccd='chezmoi cd'
-alias cedit='chezmoi edit'
+alias cedit='chezmoi edit --apply'
 alias cdiff='chezmoi diff'
