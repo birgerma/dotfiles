@@ -29,7 +29,7 @@ return {
       opt = { -- vim.opt.<key>
     breakindent = true, -- wrap indent to match  line start
         relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
+        number = false, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = true, -- sets vim.opt.wrap
