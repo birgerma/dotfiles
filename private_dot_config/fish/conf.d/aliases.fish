@@ -59,3 +59,7 @@ alias 'git-remember'='git config credential.helper "cache --timeout=28800"'
 # Auto run make on tex files
 alias texmake='find . -type f -name "*.tex" -or -name "*.bib"|entr -r make'
 
+# Chezmoi aliase
+alias ccd='chezmoi cd'
+alias cedit='chezmoi edit'
+alias cdiff='chezmoi diff'
