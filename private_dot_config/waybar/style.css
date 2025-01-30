@@ -1,0 +1,133 @@
+/* @import url("./dracula-custom/style.css"); */
+@import url("./themes/Catppuccin-Mocha.css");
+
+* {
+    font-size: 16px;
+    color: #cdd6f4;
+    /* border-radius: 10; */
+    /* background-color: @background; */
+}
+/* @import url("./dracula/style.css"); */
+
+window#waybar.empty #window{
+   /* background: white; */
+   opacity: 0;
+}
+
+#custom-expressvpn.connected{
+  /* background: rgba(55, 59, 65, 0.85); */
+  color: green;
+}
+#custom-expressvpn.disconnected{
+  /* background: rgba(55, 59, 65, 0.85); */
+  color: red;
+}
+
+# {
+
+    background: @background;
+}
+
+#battery {
+    /* background-color: #ffffff; */
+    /* background: @background; */
+    /* color: #000000; */
+    border-radius: 0px 10px 10px 0px;
+}
+/* #battery { */
+/*     background-color: @background; */
+/* } */
+#workspaces button.visible {
+      /* background: #90b1b1; */
+      background: rgba(144, 177, 177, 0.5);
+      /* opacity: 0.5; */
+    }
+
+/* #scratchpad{ */
+    /* background: #11111b; */
+/* } */
+#custom-settings{
+    background: #11111b;
+    /* padding-left: 12px; */
+    /* padding-right: 10px; */
+    padding-right: 20px;
+    border-radius: 0px 20px 20px 0px;
+    /* font-size: 10px; */
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+#custom-close{
+    background: #11111b;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* padding-right: 20px; */
+    /* padding-left: 20px; */
+    border-radius: 20px 20px 20px 20px;
+    font-size: 20px;
+    margin-top: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+window#waybar.empty #custom-close{
+   opacity: 0;
+}
+
+#custom-signal{
+    background: #11111b;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* padding-right: 20px; */
+    /* padding-left: 20px; */
+    border-radius: 20px 20px 20px 20px;
+    font-size: 20px;
+    margin-top: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+
+#idle_inhibitor{
+    background: #11111b;
+    /* padding-left: 12px; */
+    /* padding-right: 10px; */
+    padding-right: 20px;
+    border-radius: 0px 0px 0px 0px;
+    /* font-size: 10px; */
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#custom-onoff{
+    background: #11111b;
+    /* padding-left: 12px; */
+    /* padding-right: 10px; */
+    padding-right: 20px;
+    border-radius: 0px 20px 20px 0px;
+    /* font-size: 10px; */
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#clock {
+    /* border-radius: 10px; */
+    /* margin-left: 6px; */
+    /* padding-left: 12px; */
+    /* padding-right: 12px; */
+    /* margin-left: 6px; */
+    border-radius: 20px 0px 0px 20px;
+    /* font-size: 10px; */
+}
+
+#mode{
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#mpris{
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
