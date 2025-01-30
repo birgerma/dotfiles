@@ -9,8 +9,7 @@ end
 if type -q paru
     alias yay=paru
     alias fyay='\paru -Slq | fzf --multi --preview "\paru -Si {1}" | xargs -ro \paru -S'
-end
-if type -q yay
+else if -q yay
     alias fyay='\yay -Slq | fzf --multi --preview "\yay -Si {1}" | xargs -ro \yay -S'
 end
     # Emacs shortcuts
