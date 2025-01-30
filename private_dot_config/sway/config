@@ -1,0 +1,890 @@
+# exec --no-startup-id /usr/lib/pam_kwallet_init
+
+# ###############     Autostart      ##################
+# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# exec hash dbus-update-activation-environment 2>/dev/null && \
+#     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# exec_always echo $PATH >> ~/log.txt
+# # Background
+# # output * background /usr/share/backgrounds/archlinux/wave.png fill
+# # set $BACKGROUND /usr/share/wallpapers/custom/ashish-kumar-senapati-TZ8XxTBSJR4-unsplash.jpg
+# # output * background $BACKGROUND fill
+# exec_always ~/.config/sway/sway.d/scripts/rnd_wallpaper.sh
+# # $HOME/.config/sway/img/nathan-anderson-L95xDkSSuWw-unsplash.jpg fill
+# exec_always exec source ./env
+# exec_always env XCURSOR_SIZE=34
+# # exec ~/.azotebg
+
+### Turn off screen on lid closed
+set $laptop eDP-1
+bindswitch --reload --locked lid:on exec $HOME/.config/sway/sway.d/scripts/lid-on-off.sh
+bindswitch --reload --locked lid:off exec $HOME/.config/sway/sway.d/scripts/lid-on-off.sh
+exec_always $HOME/.config/sway/sway.d/scripts/lid-on-off.sh
+
+# For screen sharing
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# Variables
+# set $term foot -e "$HOME/.local/bin/tmux-fzf.py"
+set $term foot 
+# set $term distrobox enter arch -- foot
+# set $browser MOZ_ENABLE_WAYLAND=1 firefox
+# set $filebrowser $term -e ranger
+# set $editor emacs
+# set $launcher nwg-drawer
+# set $exit nwg-bar -p center -a middle -i 48 -s preset-0.css
+# set $exit "wlogout -b 5 --show-binds -T 400 -B 500 -L 200 -R 200 -c 50" 
+# set $toggle-float "$HOME/.config/sway/scripts/toggle-term.sh"
+# set $window-switcher "$HOME/.config/sway/scripts/rofi-window-switcher/window-switcher.sh"
+
+# set $lock $HOME/.config/sway/sway.d/scripts/lock.sh
+# set $slow_lock $HOME/.config/sway/sway.d/scripts/slow_lock.sh
+# exec $lock
+
+# set $menu rofi -show drun -sidemenu-mode --markup-rows
+set $menu rofi -show drun -sidemenu-mode --markup-rows
+
+#############         Bindings           ##################
+# mod key used for most binds
+# Mod1 = Alt
+set $Mod2 Control
+# Mod4 = Super
+set $Mod Mod4
+
+# *direction keys
+set $left n
+set $down e
+set $up i
+set $right o
+
+# set $browser firefox -p
+
+# Keyboard
+# input "type:keyboard" {
+#   xkb_layout us,se
+#   xkb_variant colemak,
+#   repeat_delay 300
+#   repeat_rate 40
+#   xkb_capslock disabled
+#   xkb_numlock enabled
+#   xkb_options grp:shifts_toggle
+# }
+# swaymsg -t get_inputs
+input "type:keyboard" {
+  xkb_layout eu
+  xkb_variant default,
+  repeat_delay 300
+  repeat_rate 40
+  xkb_capslock disabled
+  xkb_numlock enabled
+  xkb_options grp:shifts_toggle
+}
+# input "type:keyboard" {
+#   xkb_layout us,se
+#   xkb_variant colemak_dh,
+#   repeat_delay 300
+#   repeat_rate 40
+#   xkb_capslock disabled
+#   xkb_numlock enabled
+#   xkb_options grp:shifts_toggle
+# }
+
+
+input "36125:13370:splitkb.com_Aurora_Corne_rev1" {
+  xkb_layout eu
+  xkb_variant default,
+}
+input "13364:609:Keychron_Keychron_K6_Pro_Keyboard" {
+  xkb_layout eu
+  xkb_variant default,
+}
+ input "1133:45913:ERGO_K860_Keyboard" {
+  xkb_layout eu
+  xkb_variant default,
+}
+input "4012:2782:keyd_virtual_keyboard" {
+  xkb_layout eu
+  xkb_variant default,
+}
+
+ # 36125:13370:splitkb.com_Aurora_Corne_rev1
+# Touchpad
+input "type:touchpad" {
+  pointer_accel 0.0
+  natural_scroll disabled
+  scroll_factor 1.0
+  scroll_method two_finger
+  left_handed disabled
+  tap enabled
+  tap_button_map lrm
+  drag enabled
+  drag_lock disabled
+  dwt enabled
+  middle_emulation enabled
+}
+
+# pointer
+input "type:pointer" {
+  accel_profile flat #<flat or adaptive>
+  pointer_accel 1 #<between -1.0 and 1.0>pointer_accel 0.0
+  natural_scroll disabled
+  scroll_factor 1.0
+  left_handed disabled
+}
+# hide mouse after 5 seconds inactivity
+seat * hide_cursor 5000
+focus_follows_mouse no
+# mouse_warping container
+# floating drag
+# floating move_mouse;
+# seat * xcursor_theme Vimix-White 32
+
+# set $system_theme 'Arc-Dark'
+# set $system_icons 'Numix-Square'
+# set $system_dpi_scaling_factor 1
+# set $cursor_size 24
+# #set $cursor_theme Breeze
+# set $cursor_theme Adwaita
+# set $titlebar_text_size 12
+# set $titlebar_font Cantarell
+
+# GTK
+# This is the only place where you must set GTK scaling
+# set $gnome-schema org.gnome.desktop.interface
+# exec_always {
+#   gsettings set $gnome-schema gtk-theme $system_theme
+#   gsettings set $gnome-schema icon-theme $system_icons
+#   gsettings set $gnome-schema text-scaling-factor $system_dpi_scaling_factor
+#   gsettings set $gnome-schema cursor-theme $cursor_theme
+#   gsettings set $gnome-schema cursor-size $cursor_size
+# }
+
+# # Mouse
+# seat seat0 xcursor_theme $cursor_theme $cursor_size
+
+# Fonts (For sway window titles only)
+# font pango:$titlebar_font $titlebar_text_size
+     
+# seat * xcursor_theme xcursor-breeze 30
+     
+# bindsym --no-repeat e seat * cursor press button1
+# bindsym --no-repeat e seat * cursor press button2 # midde/scroll button
+# bindsym --no-repeat e seat * cursor press button3 # right click
+# bindsym --no-repeat e seat * cursor press button4 # nothing?
+# bindsym  k seat * cursor press button5 # scoll down?
+# bindsym  k seat * cursor press button6 # nothing?
+# bindsym  k seat * cursor press button7 # nothing?
+# bindsym  k seat * cursor press button8 # nothing?
+
+# exec output eDP-1 scale 2
+
+# Custom config files:
+
+# Custom config files:
+# include autostart.custom
+# include autostart.common
+
+# exec gitwatch -r origin $HOME/org/
+
+# include workspaces
+
+# set $lock swaylock
+# exec_always nwg-autotiling
+
+# exec_always sworkstyle &> /tmp/sworkstyle.log
+# exec sworkstyle &> /tmp/sworkstyle.log
+
+###########          Workspace Definitions       ###############
+# set $ws1  "1:   Browser "
+# set $ws2  "2:   Terminal "
+# set $ws3  "3: "
+# set $ws4  "4: "
+# set $ws5  "5: "
+# set $ws6  "6: "
+# set $ws7  "7: "
+# set $ws8  "8: "
+# set $ws9  "9: "
+# set $ws10 "10: "
+
+# switch to workspace
+bindsym $Mod+1 workspace number 1
+bindsym $Mod+2 workspace number 2 
+bindsym $Mod+3 workspace number 3
+bindsym $Mod+4 workspace number 4
+bindsym $Mod+5 workspace number 5
+bindsym $Mod+6 workspace number 6
+bindsym $Mod+7 workspace number 7
+bindsym $Mod+8 workspace number 8
+bindsym $Mod+9 workspace number 9
+bindsym $Mod+0 workspace number 0
+
+# switch to workspace - numpad alternatives
+# bindsym $Mod+Mod2+KP_1 workspace number 1
+# bindsym $Mod+Mod2+KP_2 workspace number 2
+# bindsym $Mod+Mod2+KP_3 workspace number 3
+# bindsym $Mod+Mod2+KP_4 workspace number 4
+# bindsym $Mod+Mod2+KP_5 workspace number 5
+# bindsym $Mod+Mod2+KP_6 workspace number 6
+# bindsym $Mod+Mod2+KP_7 workspace number 7
+
+# bindsym $Mod+Mod2+KP_8 workspace number 8
+
+# switch to next or previous workspace
+bindsym $Mod+$Mod2+Right workspace next
+bindsym $Mod+$Mod2+Left workspace prev
+bindsym $Mod+$Mod2+o workspace next_on_output
+bindsym $Mod+$Mod2+n workspace prev_on_output
+
+bindgesture swipe:left workspace next_on_output
+bindgesture swipe:right workspace prev_on_output
+
+ # Allow container movements by pinching them
+ # bindgesture pinch:inward+up move up
+ # bindgesture pinch:inward+down move down
+ # bindgesture pinch:inward+left move left
+ # bindgesture pinch:inward+right move right
+
+# set $sway-new-workspace ~/.cargo/bin/sway-new-workspace
+# bindsym $Mod+Mod1+o exec $sway-new-workspace open
+
+# bindsym $Mod+Mod1+Shift+o exec $sway-new-workspace move
+# bindsym $Mod+Mod1+r exec $sway-new-workspace open; exec $menu
+
+# User specific config
+# include $HOME/.config/sway/$USER/*.conf
+
+# nwg-shell sway config
+# Read `man 5 sway` for reference.
+
+# border & title
+for_window [title="^.*"] border pixel 3, title_format "<b> %title </b>"
+# for_window [title="^.*"] border pixel 3, title_format "%machine <b> %title </b>"
+
+default_border pixel 30
+default_floating_border pixel 
+
+# Hide borders if there is only one child in a workspace or container
+hide_edge_borders --i3 smart_no_gaps
+
+# for_window [app_id="vivaldi-stable"] title_format "<b>(%class) %title</b>"
+# for_window [class="work_browser"] title_format "<b>WORK</b>"
+
+# Auto tab zathura
+for_window [app_id="org.pwmt.zathura"] layout tabbed
+
+# Color theme
+# Property Name         Border  BG      Text    Indicator Child Border
+# include themes/base16-tokyo-night-dark.config
+# client.focused          $base05 $base0D $base00 $base0D $base0D
+# client.focused_inactive $base01 $base01 $base05 $base03 $base01
+# client.unfocused        $base01 $base00 $base05 $base01 $base01
+# client.urgent           $base08 $base08 $base00 $base08 $base08
+# client.placeholder      $base00 $base00 $base05 $base00 $base00
+# client.background       $base07
+
+# font
+# font pango:monospace 11
+
+# Default layout
+# workspace_layout tabbed
+
+# Inhibit swayidle on fullscreen
+for_window [class=".*"] inhibit_idle fullscreen
+
+# Auto mark windows
+# set $MARK none
+# for_window [shell="."] mark --add $$MARK; set $MARK none
+# for_window [con_mark="none"] mark --toggle none
+
+# Notifications
+# exec_always mako
+# bindsym $Mod+Shift+m mark --replace
+# exec_always echo "HELLO">>~/sway.log
+
+bindsym $Mod+Shift+q kill
+
+# core applications
+# bindsym $Mod+space   	    exec ~/.cargo/bin/wlr-which-key
+bindsym $Mod+Return       exec $term;
+# bindsym $Mod+Shift+Return exec $filebrowser
+bindsym $Mod+r	    exec $menu
+# bindsym $Mod+Control+e    exec $editor
+# bindsym $Mod+Control+f    exec $browser
+
+# bindsym $Mod+c            exec swaync-client -t
+# bindsym $Mod+Escape       exec $lock 
+
+
+# VPN
+# bindsym $Mod+f5       exec mullvad reconnect
+# bindsym $Mod+Escape       mode "normal"
+# bindsym $Mod+Escape       mode "mouse"
+# bindsym Ctrl+KP_Up seat - cursor move 0 -10
+# bindsym Ctrl+KP_Down seat - cursor move 0 10
+# bindsym Ctrl+KP_Left seat - cursor move -10 0
+# bindsym Ctrl+KP_Right seat - cursor move 10 0
+
+# bindsym Ctrl+KP_Home seat - cursor move -10 -10
+# bindsym Ctrl+KP_Up+KP_Left seat - cursor move -10 -10
+
+# bindsym Ctrl+KP_End seat - cursor move -10 10
+# bindsym Ctrl+KP_Prior seat - cursor move 10 -10
+# bindsym Ctrl+KP_Next seat - cursor move 10 10
+
+# bindsym $Mod+x seat - cursor press 272	
+# bindsym x seat - cursor press 272 # Left mouse
+# bindsym x seat - cursor press 273 # Right mouse
+# bindsym x seat - cursor press 274 #
+# bindsym --release KP_Insert seat - cursor press BTN_LEFT, seat - cursor release BTN_LEFT
+# bindsym KP_Delete seat - cursor press BTN_RIGHT, seat - cursor release BTN_RIGHT
+
+# bindsym Ctrl+KP_Up seat - cursor move 0 -10
+# bindsym $Mod+F1           exec nwg-shell-help
+
+# Drop down menu:
+# set $criteria swayTerm
+# set $overlayCriteria overlayTerm
+# set $runraise "$HOME/.config/dotfiles/sway/sway.d/scripts/sway-run-or-raise.sh"
+# set $runraise "$HOME/.config/sway/sway.d/scripts/sway-run-or-raise.sh"
+# set $prog "alacritty -t $criteria"
+# set $overlay "alacritty -t $overlayCriteria -o window.opacity=0.8"
+# bindsym $Mod+t exec $runraise $prog $criteria "1920 ppt" "540 ppt" "0 0"
+# bindsym $Mod+t exec $runraise $prog $criteria "100 ppt" "50 ppt" "0 0"
+
+# bindsym $Mod+t exec "$HOME/.config/sway/scripts/toggle-marked.sh" dropdown_terminal $term
+  # bindsym $Mod+t exec $toggle-float dropdown_terminal $term
+# bindsym $Mod+Control+Return exec $toggle-float floating_terminal "$term";
+# bindsym $Mod+d exec $toggle-float dropdown_terminal
+# bindsym $Mod+t exec $toggle-float floating_terminal;
+
+# Test binding
+# bindsym $Mod+Control+a exec foot;
+
+# bindsym $Mod+m exec $toggle-float floating_mail "firefox -P mail"
+# for_window [title="$criteria"] floating enable, move to scratchpad, resize set width 100 ppt height 50 ppt
+
+# #---Dropdown Windows---# #
+# # General dropdown window traits. The order can matter.
+for_window [title="dropdown_*"] floating enable
+for_window [title="dropdown_*"] move scratchpad
+for_window [title="dropdown_*"] sticky enable
+for_window [title="dropdown_*"] scratchpad show
+for_window [title="dropdown_*"] move position center
+# for_window [title="dropdown_*"] resize set 800 600
+for_window [title="dropdown_*"] resize set width 90 ppt height 80 ppt
+for_window [title="dropdown_*"] border pixel 1
+
+# # General dropdown window traits. The order can matter.
+for_window [title="floating_*"] floating enable
+for_window [title="floating_*"] move scratchpad
+# for_window [title="floating_*"] sticky enable
+for_window [title="floating_*"] scratchpad show
+for_window [title="floating_*"] move position center
+# for_window [titlefloatingwn_*"] resize set 800 600
+for_window [title="floating_*"] resize set width 90 ppt height 80 ppt
+for_window [title="floating_*"] border pixel 1
+
+# #---Dropdown Windows---# #
+# # General dropdown window traits. The order can matter.
+for_window [app_id="dropdown_*"] floating enable
+for_window [app_id="dropdown_*"] move scratchpad
+for_window [app_id="dropdown_*"] sticky enable
+for_window [app_id="dropdown_*"] scratchpad show
+for_window [app_id="dropdown_*"] move position center
+# for_windowapp_idle="dropdown_*"] resize set 800 600
+for_window [app_id="dropdown_*"] resize set width 90 ppt height 80 ppt
+for_window [app_id="dropdown_*"] border pixel 1
+
+# # General app_idown window traits. The order can matter.
+for_window [app_id="floating_*"] floating enable
+for_window [app_id="floating_*"] move scratchpad
+# for_windowapp_idle="floating_*"] sticky enable
+for_window [app_id="floating_*"] scratchpad show
+for_window [app_id="floating_*"] move position center
+# for_windowapp_idlefloatingwn_*"] resize set 800 600
+for_window [app_id="floating_*"] resize set width 90 ppt height 80 ppt
+for_window [app_id="floating_*"] border pixel 1
+
+# # General floating window traits. The order can matter.
+# for_window [con_mark="floating_*"] floating enable
+# for_window [con_mark="floating_*"] move scratchpad
+# for_window [con_mark="floating_*"] sticky enable
+# for_window [con_mark="floating_*"] scratchpad show
+# for_window [con_mark="floating_*"] move position center
+# for_window [con_mark="floating_*"] resize set width 90 ppt height 80 ppt
+# for_window [con_mark="floating_*"] border pixel 1
+
+# # General dropdown window traits. The order can matter.
+# for_window [con_mark="dropdown_*"] floating enable
+# for_window [con_mark="dropdown_*"] move scratchpad
+# for_window [con_mark="dropdown_*"] sticky enable
+# for_window [con_mark="dropdown_*"] scratchpad show
+# for_window [con_mark="dropdown_*"] resize set width 100 ppt height 50 ppt
+# for_window [con_mark="dropdown_*"] move position 0 0
+# for_window [con_mark="dropdown_*"] border pixel 1
+
+# for_window [title="dropdown_spt"] resize set 1200 600
+# for_window [instance="dropdown_taskell"] resize set 1200 600
+
+# Inhibit shortcuts on virt manager:
+# for_window [app_id="virt-manager"] shortcuts_inhibitor enable
+# seat * shortcuts_inhibitor disable
+
+# mode: hotkeygrab
+set $mode_hotkeygrab Hotkey grab: Control+Esc+Return to exit
+# bindsym Control+Escape+Return mode "$mode_hotkeygrab"
+bindsym Control+Escape+Return mode "nokeys"
+bindsym $Mod+f11 mode "nokeys"
+mode "nokeys" {
+  # Allow for which-key in this mode
+  bindsym $Mod+space exec ~/.cargo/bin/wlr-which-key
+  # back to normal: mod+Shift+z
+  bindsym Control+Escape+Return mode "default"
+  bindsym $Mod+f11 mode "default"
+}
+
+# set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+# mode "$mode_system" {
+#     bindsym l exec $lock, mode "default"
+#     bindsym e exit
+#     bindsym s exec --no-startup-id systemctl suspend, mode "default"
+#     bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+#     bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+
+#     # return to default mode
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+# bindsym $Mod+Control+p mode "$mode_system"
+
+# bindsym $Mod+t exec swaymsg "[title=$criteria] scratchpad show, resize set width 100 ppt height 50 ppt, move position 0 0" || $prog
+
+mode "normal" {
+# Normal mode navigation bindings here
+bindsym $left  focus left
+bindsym $down  focus down
+bindsym $up    focus up
+bindsym $right focus right
+
+bindsym $Mod+Escape       exec $lock; mode "default"
+# Enter insert mode
+bindsym Escape mode "default"
+}
+
+# bindsym Ctrl+Alt+Shift+m mode "mouse", exec warpd --normal
+# bindsym KP_Up+KP_Left  seat - cursor move -10 -10
+# bindsym KP_Up+KP_Right seat - cursor move 10 -10
+# bindsym KP_Up seat - cursor move 0 -10
+
+# bindsym KP_Down+KP_Left  seat - cursor move -10 10
+# bindsym KP_Down+KP_Right seat - cursor move 10 10
+# bindsym KP_Down seat - cursor move 0 10
+
+# bindsym KP_Left seat - cursor move -10 0
+
+# bindsym KP_Right seat - cursor move 10 0
+
+# bindsym Ctrl+Alt+Shift+f exec warpd --oneshot --hint --click 0
+# bindsym Ctrl+Alt+Shift+m exec warpd  --hint
+
+# # bindsym Ctrl+Alt+Shift+m mode "mouse"
+
+# bindsym --release Shift+KP_Insert seat - cursor press BTN_LEFT
+# bindsym --release KP_Insert seat - cursor press BTN_LEFT, seat - cursor release BTN_LEFT
+
+# bindsym KP_Delete seat - cursor press BTN_MIDDLE, seat - cursor release BTN_RIGHT
+# bindsym KP_Enter seat - cursor press BTN_RIGHT, seat - cursor release BTN_RIGHT
+
+# # bindsym Ctrl mode "mouse"
+# mode "mouse" {
+#     bindsym KP_Up+KP_Left seat - cursor move -10 -10
+#     bindsym KP_Up seat - cursor move 0 -10
+
+#     bindsym KP_Down seat - cursor move 0 10
+#     bindsym KP_Left seat - cursor move -10 0
+#     bindsym KP_Right seat - cursor move 10 0
+#     bindsym KP_Home seat - cursor move -10 -10
+#     bindsym KP_End seat - cursor move -10 10
+#     bindsym KP_Prior seat - cursor move 10 -10
+#     bindsym KP_Next seat - cursor move 10 10
+#     bindsym --release KP_Insert seat - cursor press BTN_LEFT, seat - cursor release BTN_LEFT
+#     bindsym KP_Delete seat - cursor press BTN_RIGHT, seat - cursor release BTN_RIGHT
+
+#     bindsym 1 seat - cursor press BTN_LEFT 
+#     bindsym 2 seat - cursor press BTN_RIGHT
+#     bindsym 3 seat - cursor press POINTER_SCROLL_WHEEL
+#     bindsym 4 seat - scroll_button press vert
+#     bindsym 5 seat - cursor move 0 10
+#     bindsym 6 seat - cursor move -w 0 10
+#     bindsym 7 seat - cursor press 7
+#     bindsym 8 seat - cursor press 8
+#     bindsym 9 seat - cursor press 9
+
+#     # Return to default mode
+#     bindsym Escape mode "default"
+# }
+#bindsym $mod+m mode "mouse1"
+
+# set $mode_launcher Launch: [f]irefox [t]hunderbird
+# bindsym $Mod+o mode "$mode_launcher"
+
+# mode "$mode_launcher" {
+#     bindsym f exec firefox
+#     bindsym t exec thunderbird
+
+#     bindsym Escape mode "default"
+#     bindsym Return mode "default"
+# }
+
+for_window [shell="xwayland"] title_format "<span>[X] %title</span>"
+
+# For floating network manager
+# for_window [title="floatingNetwork"] floating enable
+
+# Scratchpad spotify
+# for_window [instance="spotify"] floating enable, move to scratchpad, resize set 1920 1000 px
+# bindsym $Mod+Control+m exec swaymsg "[instance=spotify] scratchpad show" || spotify-launcher
+
+# bindsym $Mod+f7 exec swaymsg "[instance=spotify] scratchpad show" || spotify-launcher
+# Scratchpad Signal
+# set $float_pos_size border none, move position center, resize set width 90 ppt height 90 ppt
+# set $float_size resize set width 90 ppt height 90 ppt
+# for_window [instance="signal"] floating enable, move to scratchpad, set width 90 ppt height 90 ppt
+
+# bindsym $Mod+Control+s exec swaymsg "[instance=signal] scratchpad show" || signal-desktop, [instance="signal"] $float_size
+# bindsym $Mod+Control+s exec swaymsg "[instance=signal] scratchpad show" || signal-desktop
+# bindsym $Mod+f8 exec swaymsg "[instance=signal] scratchpad show" || signal-desktop
+
+set $float_pos_size border none, move position center, resize set width 90 ppt height 90 ppt
+bindsym $Mod+a exec swaymsg resize set width 90 ppt height 90 ppt
+# bindsym $Mod+a exec foot 
+# Scratchpad Zulip
+# for_window [instance="zulip"] floating enable, move to scratchpad, mark zulip, resize set width 90 ppt height 90 ppt
+# bindsym $Mod+Control+z exec swaymsg "[instance=zulip] scratchpad show" || zulip
+
+# Floating slack
+# for_window [instance="slack"] floating enable, move to scratchpad,set width 90 ppt height 90 ppt
+# for_window [instance="slack"] floating enable, move to scratchpad, resize set 1920 1000 px
+
+# Floating scratchpad nextcloud
+# for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable, move to scratchpad, resize set width 90 ppt height 90 ppt
+# for_window [app_id="com.nextcloud.desktopclient.nextcloud"] floating enable
+
+# Scratchpad Mail
+# set $fsize resize set width 90 ppt height 80 ppt
+# set $fsize set width 80 ppt height 80 ppt
+# bindsym $Mod+m exec swaymsg [app_id="floating_mail"] scratchpad show || exec firefox -P mail --name="floating_mail", $fsize
+
+# Scratchpad superproductivity
+# "instance": "superproductivity"
+# for_window [instance="superproductivity"] floating enable, move to scratchpad resize height 90 ppt width 90 ppt
+# bindsym $Mod2+Shift+x exec swaymsg "[instance=superproductivity] scratchpad show, resize set width 95 ppt height 95 ppt" ||  superproductivity
+
+# Popups as floating windows
+for_window {
+    [window_role="(pop-up|bubble|dialog)"] floating enable
+}
+# for_window [app_id="blueman-manager"] floating enable, resize set width 80 ppt height 80 ppt
+
+
+# for_window [app_id="wdisplays"] floating enable, resize set width 80 ppt height 80 ppt
+
+
+# for_window [app_id="pavucontrol"] floating enable, resize set width 80 ppt height 80 ppt
+
+# for_window [class="homeassistant-desktop"] floating enable
+# for_window [app_id="cairo-dock"] floating enable
+# , resize set width 40 ppt height 40 ppt
+
+# for_window [title="KeePassXC - Browser Access Request"] floating enable
+# for_window [title=".* - KeePassXC"] floating enable, move to scratchpad, resize set height 90 ppt
+# bindsym $Mod+k exec swaymsg "[title=.*KeePassXC] scratchpad show" || keepassxc
+# , resize set 1920 1000 px
+# , resize set height 50ppt
+# , resize set height 50ppt
+# , resize set height 50ppt
+# , resize set height 50ppt
+
+# Floating zoom
+# for_window [class="zoom"] floating enable
+# for_window [app_id="zoom"] floating enable $fsize
+# for_window [class="zoom"] floating enable, $float_pos_size
+
+# Floating dolphin
+# for_window [app_id="org.kde.dolphin"] floating enable, resize set 90 ppt 90 ppt
+
+# Floating Thunar
+# for_window [app_id="thunar"] floating enable, resize set 90 ppt 90 ppt
+
+# bindsym $Mod+x exec $exit
+# bindsym $Mod+x exec wlogout -b 5 --show-binds -T 400 -B 500 -L 200 -R 200 -c 50
+# Exit sway (default way to log you out of your Wayland session)
+# bindsym $Mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# screenshot
+# Comments to work with remonoire, to be extended
+## Printscreen // Fullscreen // Print ##
+# bindsym Print exec grim -g "$(slurp)" - |yad --file-selection
+# bindsym Print exec screenshot fullscreen
+# bindsym Control+Print exec screenshot display
+# bindsym Shift+Control+Print exec grim -g "$(slurp)" - | swappy -f -
+# bindsym $Mod+Shift+Control+Print exec screenshot focused
+
+# audio
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioMute exec pamixer -t
+bindsym XF86AudioRaiseVolume exec pamixer -i 2
+bindsym XF86AudioLowerVolume exec pamixer -d 2
+
+# backlight
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+
+# Reload the configuration file
+bindsym $Mod+Shift+c reload
+
+# workspace $ws1 output eDP-1
+# set $laptop "eDP-1"
+
+# set $monitor_home_primary "Acer Technologies EB243Y A T7NEE0053P00"
+# set $monitor_home_second "Dell Inc. DellSP2008WFP RU7677BN453C"
+
+# set $monitor_work "HP Inc. HP E243i 6CM7520CN9"
+###########          Workspace Bindings          ###############
+
+# move focused container to workspace
+# bindsym $Mod+Shift+1 move container to workspace number 1; workspace number 1
+# bindsym $Mod+Shift+2 move container to workspace number 2; workspace number 2
+# bindsym $Mod+Shift+3 move container to workspace number 3; workspace number 3
+# bindsym $Mod+Shift+4 move container to workspace number 4; workspace number 4
+# bindsym $Mod+Shift+5 move container to workspace number 5; workspace number 5
+# bindsym $Mod+Shift+6 move container to workspace number 6; workspace number 6
+# bindsym $Mod+Shift+7 move container to workspace number 7; workspace number 7
+# bindsym $Mod+Shift+8 move container to workspace number 8; workspace number 8
+# bindsym $Mod+Shift+9 move container to workspace number 9; workspace number 9
+# bindsym $Mod+Shift+0 move container to workspace number 0; workspace number 0
+bindsym $Mod+Shift+1 move container to workspace number 1
+bindsym $Mod+Shift+2 move container to workspace number 2
+bindsym $Mod+Shift+3 move container to workspace number 3
+bindsym $Mod+Shift+4 move container to workspace number 4
+bindsym $Mod+Shift+5 move container to workspace number 5
+bindsym $Mod+Shift+6 move container to workspace number 6
+bindsym $Mod+Shift+7 move container to workspace number 7
+bindsym $Mod+Shift+8 move container to workspace number 8
+bindsym $Mod+Shift+9 move container to workspace number 9
+bindsym $Mod+Shift+0 move container to workspace number 0
+# move focused container to workspace - numpad alternatives
+bindsym $Mod+Shift+Mod2+KP_End   move container to workspace number 1; workspace number 1
+bindsym $Mod+Shift+Mod2+KP_Down  move container to workspace number 2; workspace number 2
+bindsym $Mod+Shift+Mod2+KP_Next  move container to workspace number 3; workspace number 3
+bindsym $Mod+Shift+Mod2+KP_Left  move container to workspace number 4; workspace number 4
+bindsym $Mod+Shift+Mod2+KP_Begin move container to workspace number 5; workspace number 5
+bindsym $Mod+Shift+Mod2+KP_Right move container to workspace number 6; workspace number 6
+bindsym $Mod+Shift+Mod2+KP_Home  move container to workspace number 7; workspace number 7
+bindsym $Mod+Shift+Mod2+KP_Up    move container to workspace number 8; workspace number 8
+
+## Modify // Move Workspace to output // <><Alt> ↑ ↓ ← → ##
+bindsym $Mod+Shift+j move workspace to output left
+bindsym $Mod+Shift+l move workspace to output down
+bindsym $Mod+Shift+u move workspace to output up
+bindsym $Mod+Shift+y move workspace to output right
+
+bindsym $Mod+Alt+Shift+left  move workspace to output left
+bindsym $Mod+Alt+Shift+down  move workspace to output down
+bindsym $Mod+Alt+Shift+up    move workspace to output up
+bindsym $Mod+Alt+Shift+right move workspace to output right
+
+############      Container/Window control  ############
+# Scratchpad, Floating
+bindsym $Mod+Shift+Escape floating toggle
+# floating_modifier Mod1 normal
+floating_modifier $Mod normal
+
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $Mod+Shift+z move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $Mod+z scratchpad show
+# bindsym $Mod+k exec swaymsg "[title=.*KeePassXC] scratchpad show" || keepassxc
+# bindsym $Mod+Shift+b exec swaymsg "[window_type=browser$] scratchpad show"
+
+# change focus
+bindsym $Mod+$left  focus left
+bindsym $Mod+$down  focus down
+bindsym $Mod+$up    focus up
+bindsym $Mod+$right focus right
+
+# Use cursor keys to change monitor:
+bindsym $Mod+Left   focus output left
+bindsym $Mod+Down   focus output down
+bindsym $Mod+Up     focus output up
+bindsym $Mod+Right  focus output right
+
+# move focus to the parent container
+# bindsym $Mod+p      focus parent
+bindsym $Mod+p      focus mode_toggle
+
+# move focused window
+bindsym $Mod+Shift+$left  move left
+bindsym $Mod+Shift+$down  move down
+bindsym $Mod+Shift+$up    move up
+bindsym $Mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $Mod+Shift+Up    move container to output up,    focus output up   
+bindsym $Mod+Shift+Down  move container to output down,  focus output down
+bindsym $Mod+Shift+Left  move container to output left,  focus output left
+bindsym $Mod+Shift+Right move container to output right, focus output right
+
+# Resizing containers
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $Mod+Shift+r mode "resize"
+##
+
+# move floating windows with keys
+# bindsym $mod+m mode "move" focus floating
+mode "move" {
+    bindsym $Mod+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    bindsym n     move left
+    bindsym e     move down
+    bindsym i     move up
+    bindsym o     move right
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Size
+# bindsym Mod1+Up    resize shrink height 10 px or 1 ppt
+# bindsym Mod1+Down  resize grow   height 10 px or 1 ppt
+# bindsym Mod1+Left  resize shrink width  10 px or 1 ppt
+# bindsym Mod1+Right resize grow   width  10 px or 1 ppt
+
+# layout toggle
+bindsym $Mod+Shift+Tab layout toggle tabbed stacking split
+# bindsym $Mod+Tab layout toggle tabbed stacking split
+# bindsym $Mod+w layout tabbed
+# bindsym $Mod+Tab layout tabbed
+# bindsym $Mod+Tab layout toggle splitv splith
+
+# container layout
+# bindsym $Mod+h split h
+# bindsym $Mod+v split v
+bindsym $Mod+h splitv
+bindsym $Mod+v splith
+bindsym $Mod+Shift+t layout tabbed
+bindsym $Mod+Shift+s layout stacking
+# bindsym $Mod+Shift+h layout toggle split
+
+default_orientation horizontal
+
+# i3-focus-last
+exec_always i3-focus-last server
+bindsym $Mod+Tab exec i3-focus-last
+
+# bindsym $Mod+Tab exec "$HOME/.config/sway/scripts/rofi-window-switcher/window-switcher.sh"
+# bindsym Mod1+Tab exec $window-switcher
+# bindsym $Mod+w exec $window-switcher
+
+# bindsym Alt_L --release exec foot
+# bindsym leftmeta --release exec foot
+# bindsym Mod1+Tab mode winswitch
+# mode winswitch {
+#      bindsym Alt_L --release mode "default"
+#     bindsym Escape mode "default"
+#    
+
+# switch to workspace with urgent window
+for_window [urgent="latest"] focus
+focus_on_window_activation   focus
+
+# make the current focus fullscreen
+bindsym $Mod+f fullscreen
+
+###############      Border & Gaps     ###############
+# gaps inner 5
+# gaps outer 0
+# smart_gaps off
+
+# Test for use on ultrawide monitor
+smart_gaps inverse_outer
+gaps horizontal 100
+# gaps horizontal 820
+# 25% width horizontal padding
+
+# changing border style
+# bindsym $Mod+b border toggle
+
+# change gaps
+bindsym $Mod+plus                gaps inner current plus  5
+bindsym $Mod+minus               gaps inner current minus 5
+bindsym Mod1+plus                gaps outer current plus  5
+bindsym Mod1+minus               gaps outer current minus 5
+
+bindsym $Mod+KP_Add              gaps inner current plus  5
+bindsym $Mod+KP_Subtract         gaps inner current minus 5
+bindsym Mod1+KP_Add              gaps outer current plus  5
+bindsym Mod1+KP_Subtract         gaps outer current minus 5
+
+############    application settings   ############
+for_window [app_id="(?i)(?:pavucontrol|nm-connection-editor|gsimplecal|galculator)"] floating enable
+# for_window [app_id="(?i)(?:firefox|chromium)"] border none
+for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+
+popup_during_fullscreen smart
+
+bar {
+    id bar_0
+    swaybar_command waybar
+    position top
+    # mode show
+    # mode hide
+    modifier $Mod
+# kill focused window
+}
+
+############    SwayFx settings   ############
+# corner_radius 10
+# scratchpad_minimize disable
+# smart_corner_radius enable
+# blur enable
+# blur disable
+# blur_passes 0
+# default_dim_inactive 0.5
+
+# exec_always "output * dpms on"
+# exec_always kanshictl reload
+# exec_always "output * scale_filter linear"
+# output eDP-1 scale_filter linear
