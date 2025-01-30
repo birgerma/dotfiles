@@ -3,10 +3,17 @@ set fish_greeting
 # Custom commands in sudo mode:                                                                                                                                                                                                                
 alias 'sudo'='sudo '
 
-alias yay=paru
-alias fpac='\pacman -Slq | fzf --multi --preview "\pacman -Si {1}" | xargs -ro sudo \pacman -S'
-alias fyay='\yay -Slq | fzf --multi --preview "\yay -Si {1}" | xargs -ro \yay -S'
-# Emacs shortcuts
+if type -q pacman
+    alias fpac='\pacman -Slq | fzf --multi --preview "\pacman -Si {1}" | xargs -ro sudo \pacman -S'
+end
+if type -q paru
+    alias yay=paru
+    alias fyay='\paru -Slq | fzf --multi --preview "\paru -Si {1}" | xargs -ro \paru -S'
+end
+if type -q yay
+    alias fyay='\yay -Slq | fzf --multi --preview "\yay -Si {1}" | xargs -ro \yay -S'
+end
+    # Emacs shortcuts
 # alias 'em'='emacsclient -create-frame --alternate-editor="" -nw'
 
 export EMACS_USER_DIRECTORY=~/.config/emacs/
