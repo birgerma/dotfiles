@@ -13,7 +13,8 @@ DEBUG = True
 LOG_PATH = os.getenv("HOME")+'/.local/bin/log.txt'
 SCRIPT_PATH = os.path.abspath(__file__)
 
-PROJECT_FOLDERS = ["~/projects", "~/.config/dotfiles"]
+# PROJECT_FOLDERS = ["~/projects", "~/.config/dotfiles"]
+PROJECT_FOLDERS = ["~/projects", "~/.config/"]
 
 tmux_sessions, tmuxinator_sessions, local_tmuxinator_paths, project_folders = [],[],[],[]
 

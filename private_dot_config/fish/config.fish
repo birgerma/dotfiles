@@ -3,6 +3,7 @@ set fish_greeting
 # Custom commands in sudo mode:                                                                                                                                                                                                                
 alias 'sudo'='sudo '
 
+alias yay=paru
 alias fpac='\pacman -Slq | fzf --multi --preview "\pacman -Si {1}" | xargs -ro sudo \pacman -S'
 alias fyay='\yay -Slq | fzf --multi --preview "\yay -Si {1}" | xargs -ro \yay -S'
 # Emacs shortcuts
