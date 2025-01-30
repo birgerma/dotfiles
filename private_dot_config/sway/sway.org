@@ -19,7 +19,7 @@
 # exec_always echo $PATH >> ~/log.txt
   
 # # Background
-set $BACKGROUND $HOME/backgrounds/default
+set $BACKGROUND $HOME/.config/backgrounds/default
 output * background $BACKGROUND fill
 # # output * background /usr/share/backgrounds/archlinux/wave.png fill
 # # set $BACKGROUND /usr/share/wallpapers/custom/ashish-kumar-senapati-TZ8XxTBSJR4-unsplash.jpg
