@@ -1,10 +1,10 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-return {
-  opts = {
-    number = true,
-    autopairs = false,
-  }
-}
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- return {
+--   opts = {
+--     number = true,
+--     autopairs = false,
+--   }
+-- }
 
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
@@ -88,4 +88,13 @@ return {
       )
     end,
   },
+  {
+  "xiyaowong/transparent.nvim",
+    lazy = false,
+    config = function()
+      require("transparent").setup({
+        -- Optional, you don't have to run setup
+      })
+    end
+  }
 }
