@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Capture the output of chezmoi status
+output=$(chezmoi status)
+
+# Check if the output is empty
+if [ -z "$output" ]; then
+    echo "There are no differences."
+else
+    # Use the captured output for fzf
+    echo "$output" | fzf --preview "chezmoi diff $HOME/{-1}"
+fi

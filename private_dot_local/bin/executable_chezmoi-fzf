@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Based on the script from:
+# https://github.com/twpayne/chezmoi/discussions/2631#discussioncomment-4457933
+cfzf () {
+  file_path=$(chezmoi managed --include=files --exclude=externals | fzf --reverse --preview="bat --color always $HOME/{} | head -n 200" --query="$1")
+
+
+  if [ -z "$file_path" ]; then
+    >&2 echo "No file selected"
+  else
+    chezmoi edit --apply --watch "$HOME/$file_path"
+  fi
+}
+
+cfzf $1
