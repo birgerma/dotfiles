@@ -5,7 +5,7 @@
 #[╰─cmd────❯](bold green)
 #"""
 format = """
-${custom.foo}\
+${custom.distrobox}\
 [░▒▓](#a3aed2)\
 [\uf303 ](bg:#a3aed2 fg:#090c0c)\
 [ ](bg:#769ff0 fg:#a3aed2)\
@@ -78,19 +78,20 @@ detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
 detect_folders = []
 disabled = false
 
-[container]
+# [container]
   # enabled = true
-  symbol = "(symbol)"
-  format = 'in container [$symbol \[$name\]](test) {id:echo $CONTAINER_ID}{name:$name}'
+  # style = "blue bold"
+  # symbol = "(symbol) test "
+  # format = 'in container [$symbol \[$name\]](test) {id:echo $CONTAINER_ID}{name:$name}'
   # format = "[{distro}/{container}]"
 
-[custom.foo]
+[custom.distrobox]
 symbol = " "
 command = 'echo $CONTAINER_ID' # shows output of command
-detect_files = ['foo'] # can specify filters but wildcards are not supported
+# detect_files = ['foo'] # can specify filters but wildcards are not supported
 when = ''' test "$CONTAINER_ID" '''
 # format = 'transcending'
-style = 'bold red'
+style = 'bold blue'
 format = '\([$symbol$output]($style)\)'
 
 [elixir]
